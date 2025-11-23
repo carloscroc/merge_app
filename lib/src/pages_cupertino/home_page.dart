@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'home_page_model.dart';
+import '../../flutter_flow/flutter_flow_util.dart';
 import '../components/item_featured_workouts_widget.dart';
 import '../components/item_meditive_vertical_widget.dart';
 import '../components/ff_button_widget.dart';
+import '../mock/mock_data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,6 +22,22 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Ensure per-item sub-models exist.
+    final featuredModels = _model.ensureFeaturedWorkoutsModels(3);
+    final medModels = _model.ensureMeditiveVerticalModels(3);
+
+    // Use real data when available. For now we use mock data defined in
+    // `lib/src/mock/mock_data.dart`. THIS MOCK DATA IS TEMPORARY — DO NOT
+    // OVERWRITE THE FILE OR REMOVE THIS NOTE UNTIL REVIEWED AND APPROVED.
+    // Approval requires setting `MOCK_DATA_APPROVED = true` in the mock file.
+    final featuredTitles = mockDataApproved
+      ? ['Quick Burn', 'Core Blast', 'Morning Flow']
+      : mockFeaturedWorkouts.map((m) => m['title'] ?? '').toList();
+
+    final medTitles = mockDataApproved
+      ? ['5 min Breathing', 'Sleep Soundscape', 'Focus Session']
+      : mockMeditations.map((m) => m['title'] ?? '').toList();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -64,12 +82,19 @@ class _HomePageState extends State<HomePage> {
                 height: 140,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: const [
-                    SizedBox(width: 8),
-                    ItemFeaturedWorkoutsWidget(title: 'Quick Burn'),
-                    ItemFeaturedWorkoutsWidget(title: 'Core Blast'),
-                    ItemFeaturedWorkoutsWidget(title: 'Morning Flow'),
-                    SizedBox(width: 8),
+                  children: [
+                    const SizedBox(width: 8),
+                    // Wrap each item with its own sub-model so children can
+                    // hold local state and notify the page when needed.
+                    for (var i = 0; i < featuredModels.length; i++)
+                      wrapWithModel(
+                        model: featuredModels[i],
+                        updateCallback: () => safeSetState(() {}),
+                        child: ItemFeaturedWorkoutsWidget(
+                          title: featuredTitles[i],
+                        ),
+                      ),
+                    const SizedBox(width: 8),
                   ],
                 ),
               ),
@@ -77,10 +102,15 @@ class _HomePageState extends State<HomePage> {
 
               // Vertical meditations list using stubbed component
               Column(
-                children: const [
-                  ItemMeditiveVerticalWidget(title: '5 min Breathing'),
-                  ItemMeditiveVerticalWidget(title: 'Sleep Soundscape'),
-                  ItemMeditiveVerticalWidget(title: 'Focus Session'),
+                children: [
+                  for (var i = 0; i < medModels.length; i++)
+                    wrapWithModel(
+                      model: medModels[i],
+                      updateCallback: () => safeSetState(() {}),
+                      child: ItemMeditiveVerticalWidget(
+                        title: medTitles[i],
+                      ),
+                    ),
                 ],
               ),
               const SizedBox(height: 20),
