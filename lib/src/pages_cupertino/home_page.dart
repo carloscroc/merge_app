@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 height: 200,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceVariant,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Center(child: Text('Hero / Featured')),
