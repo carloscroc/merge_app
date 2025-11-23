@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'src/routes/app_router.dart';
 import 'src/core/constants.dart';
 
@@ -16,6 +17,12 @@ class MyApp extends StatelessWidget {
       theme: const CupertinoThemeData(primaryColor: CupertinoColors.activeBlue),
       initialRoute: Routes.home,
       onGenerateRoute: AppRouter.onGenerateRoute,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('en')],
     );
   }
 }
