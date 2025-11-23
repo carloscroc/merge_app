@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import '../features/home/presentation/pages/home_screen.dart';
+import '../pages_cupertino/home_page.dart';
 import '../features/profile/presentation/pages/profile_screen.dart';
 
 class AppRouter {
@@ -9,7 +9,7 @@ class AppRouter {
         return CupertinoPageRoute(builder: (_) => const ProfileScreen());
       case '/':
       default:
-        return CupertinoPageRoute(builder: (_) => const HomeScreen());
+        return CupertinoPageRoute(builder: (_) => const HomePage());
     }
   }
 }
