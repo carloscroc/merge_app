@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Minimal replacement for FlutterFlow button used in the UI.
 class FFButtonWidget extends StatelessWidget {
-  const FFButtonWidget({Key? key, required this.onPressed, required this.label}) : super(key: key);
+  const FFButtonWidget({super.key, required this.onPressed, required this.label});
 
   final VoidCallback onPressed;
   final String label;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Placeholder for featured workout item used in the home page.
 class ItemFeaturedWorkoutsWidget extends StatelessWidget {
-  const ItemFeaturedWorkoutsWidget({Key? key, this.title}) : super(key: key);
+  const ItemFeaturedWorkoutsWidget({super.key, this.title});
 
   final String? title;
 

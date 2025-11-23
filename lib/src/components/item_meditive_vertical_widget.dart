@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Placeholder for meditative vertical item used in lists.
 class ItemMeditiveVerticalWidget extends StatelessWidget {
-  const ItemMeditiveVerticalWidget({Key? key, this.title}) : super(key: key);
+  const ItemMeditiveVerticalWidget({super.key, this.title});
 
   final String? title;
 
